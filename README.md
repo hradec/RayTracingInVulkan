@@ -28,13 +28,22 @@ To benchmark all the scenes, starting from scene #1:
 ```
 > RayTracer.exe --benchmark --width 2560 --height 1440 --fullscreen --scene 1 --next-scenes --present-mode 0
 ```
-Here are my results with the command above on a few different computers using NVIDIA drivers 436.48 and Release 4 of the RayTracer.
+Here are my results with the command above on a few different computers.
+
+**RayTracer Release 5 (NVIDIA drivers 460.89)**
 
 | Platform | Scene 1 | Scene 2 | Scene 3 | Scene 4 | Scene 5 |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| GeForce RTX 2080 Ti | 36.1 fps | 35.7 fps | 19.9 fps | 54.9 fps | 15.1 fps |
+| GeForce RTX 3090 FE | 42.7 fps | 43.6 fps | 39.1 fps | 78.5 fps | 40.0 fps |
+| GeForce RTX 2080 Ti FE | 37.7 fps | 38.2 fps | 24.2 fps | 58.7 fps | 21.4 fps |
+
+**RayTracer Release 4 (NVIDIA drivers 436.48)**
+
+| Platform | Scene 1 | Scene 2 | Scene 3 | Scene 4 | Scene 5 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| GeForce RTX 2080 Ti FE | 36.1 fps | 35.7 fps | 19.9 fps | 54.9 fps | 15.1 fps |
 | GeForce RTX 2070 | 19.9 fps | 19.9 fps | 11.7 fps | 30.4 fps | 9.5 fps |
-| GeForce GTX 1080 Ti | 3.4 fps | 3.4 fps | 1.9 fps | 3.8 fps | 1.3 fps |
+| GeForce GTX 1080 Ti FE | 3.4 fps | 3.4 fps | 1.9 fps | 3.8 fps | 1.3 fps |
 
 ## Building
 
@@ -49,7 +58,7 @@ If in doubt, please check the GitHub Actions [continuous integration configurati
 ```
 **Linux (GCC 9+ Makefile)** [![Linux CI Status](https://github.com/GPSnoopy/RayTracingInVulkan/workflows/Linux%20CI/badge.svg)](https://github.com/GPSnoopy/RayTracingInVulkan/actions?query=workflow%3A%22Linux+CI%22)
 ```
-> sudo apt-get install curl unzip tar libxi-dev libxinerama-dev libxcursor-dev
+> sudo apt-get install curl unzip tar libxi-dev libxinerama-dev libxcursor-dev xorg-dev
 > ./vcpkg_linux.sh
 > ./build_linux.sh
 ```
@@ -60,7 +69,9 @@ If in doubt, please check the GitHub Actions [continuous integration configurati
 
 - When I upgraded the drivers to 430.86, performance significantly improved (+50%). This was around the same time Quake II RTX was released by NVIDIA. Coincidence?
 
-- When looking at the benchmark results of an RTX 2070 and an RTX 2080 Ti, the performance differences mostly in line with the number of CUDA cores and RT cores rather than being influences by other metrics. Although I do not know at this point whether the CUDA cores or the RT cores are the main bottleneck.
+- When looking at the benchmark results of an RTX 2070 and an RTX 2080 Ti, the performance differences mostly in line with the number of CUDA cores and RT cores rather than being influences by other metrics. Although I do not know at this point whether the CUDA cores or the RT cores are the main bottleneck. 
+
+- UPDATE 2020-01-07: the RTX 30xx results seem to imply that performance is mostly dictated by the number of RT cores. Compared to Turing, Ampere achieves 2x RT performance only when using ray-triangle intersection (as expected as per NVIDIA Ampere whitepaper), otherwise performance per RT core is the same. This leads to situations such as an RTX 2080 Ti being faster than an RTX 3080 when using procedural geometry.
 
 ## References
 
