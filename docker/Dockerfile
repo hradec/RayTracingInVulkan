@@ -5,6 +5,13 @@ ENV VK_SDK_VERSION=${VK_VERSION}
 
 RUN echo "VK_SDK_VERSION=$VK_SDK_VERSION"
 
+
+ARG http
+ARG https
+
+ENV http_proxy=$http
+ENV https_proxy=$https
+
 # install some basic tools needed to continue
 RUN apt update
 RUN apt install -y wget gnupg sudo curl zip unzip tar
