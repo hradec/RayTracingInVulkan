@@ -28,6 +28,9 @@ docker inspect ray_tracing_in_vulkan >/dev/null || docker build . \
 && docker cp trow_away_ray_tracing_in_vulkan:/lib/x86_64-linux-gnu/libm-2.31.so ./build_ubuntu20.04/linux/libs/ \
 && docker cp trow_away_ray_tracing_in_vulkan:/lib/x86_64-linux-gnu/libstdc++.so.6 ./build_ubuntu20.04/linux/libs/ \
 && docker cp trow_away_ray_tracing_in_vulkan:/lib/x86_64-linux-gnu/libstdc++.so.6.0.28 ./build_ubuntu20.04/linux/libs/ \
+&& docker cp trow_away_ray_tracing_in_vulkan:/lib/x86_64-linux-gnu/libvulkan.so ./build_ubuntu20.04/linux/libs/ \
+&& docker cp trow_away_ray_tracing_in_vulkan:/lib/x86_64-linux-gnu/libvulkan.so.1 ./build_ubuntu20.04/linux/libs/ \
+&& docker cp trow_away_ray_tracing_in_vulkan:/lib/x86_64-linux-gnu/libvulkan.so.1.2.162 ./build_ubuntu20.04/linux/libs/ \
 && docker rm trow_away_ray_tracing_in_vulkan \
 && echo -e "#!/bin/bash\n\ncd \$(dirname \$(readlink -f \$BASH_SOURCE))\nLD_LIBRARY_PATH=\$(pwd)/libs ./bin/RayTracer\n" > ./build_ubuntu20.04/linux/run.sh \
 && chmod a+x ./build_ubuntu20.04/linux/run.sh \
