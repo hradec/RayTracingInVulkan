@@ -333,3 +333,4 @@ ASALocalRun/
 build
 build_*
 *.done
+/run.sh
