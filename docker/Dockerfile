@@ -33,6 +33,7 @@ RUN apt install -y libboost-all-dev
 RUN apt install -y libglm-dev
 # imgui library is packed inside these packages in ubuntu
 RUN apt install -y libxi-dev libxinerama-dev libxcursor-dev
+RUN apt install -y xorg-dev
 
 # now we add this git depot into /root/build
 ADD . /root/depot
